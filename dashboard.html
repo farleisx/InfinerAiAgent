@@ -1,0 +1,23 @@
+<textarea id="code" placeholder="Type HTML/CSS/JS"></textarea>
+<button id="run">Run</button>
+<iframe id="preview"></iframe>
+
+<input type="text" id="ai-prompt" placeholder="Ask AI to code something"/>
+<button id="ai-run">Ask AI</button>
+
+<script>
+document.getElementById("run").addEventListener("click", ()=>{
+  document.getElementById("preview").srcdoc = document.getElementById("code").value;
+});
+
+document.getElementById("ai-run").addEventListener("click", async ()=>{
+  const prompt = document.getElementById("ai-prompt").value;
+  const res = await fetch('/api/ai-agent', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({prompt})
+  });
+  const data = await res.json();
+  document.getElementById("code").value = data.output;
+});
+</script>
