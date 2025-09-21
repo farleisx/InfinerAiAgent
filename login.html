@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - Infiner AI</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="auth-container">
+  <h1>Login to Infiner AI</h1>
+  <form id="loginForm">
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <button type="submit" class="btn">Login</button>
+  </form>
+  <p>Don't have an account? <a href="/pages/signup.html">Sign Up</a></p>
+</div>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(e.target));
+
+  try {
+    const res = await fetch('/api/login', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+
+    if(result.success){
+      // redirect to dashboard
+      location.href='/pages/dashboard.html';
+    } else {
+      alert(result.error || "Login failed");
+    }
+  } catch(err){
+    alert("Server error. Try again later.");
+    console.error(err);
+  }
+});
+</script>
+</body>
+</html>
