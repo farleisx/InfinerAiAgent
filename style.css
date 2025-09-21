@@ -1,0 +1,12 @@
+.btn{
+  padding:12px 24px;
+  background:linear-gradient(90deg,#6a5cff,#ff6ac1);
+  color:#fff;
+  border-radius:12px;
+  transition:0.3s;
+  text-decoration:none;
+}
+.btn:hover{
+  transform:scale(1.05);
+  box-shadow:0 4px 15px rgba(0,0,0,0.2);
+}
