@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infiner AI - Build Anything</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header>
+  <h1>Infiner AI</h1>
+  <h2 id="hero-text"></h2>
+  <div class="buttons">
+    <a href="/pages/login.html" class="btn">Login</a>
+    <a href="/pages/signup.html" class="btn">Sign Up</a>
+  </div>
+</header>
+<script>
+const heroText = ["Build Your App", "Launch Your Game", "Create Your Portfolio", "Deploy Your Website"];
+let i=0, j=0, current="", isDeleting=false;
+const speed=100;
+
+function typeWriter(){
+  const txt = heroText[i];
+  if(isDeleting){
+    current = txt.substring(0,j--);
+  } else {
+    current = txt.substring(0,j++);
+  }
+  document.getElementById("hero-text").textContent=current;
+  
+  if(!isDeleting && j===txt.length){isDeleting=true; setTimeout(typeWriter, 1200); return;}
+  if(isDeleting && j===0){isDeleting=false; i=(i+1)%heroText.length;}
+  setTimeout(typeWriter, isDeleting?50:speed);
+}
+typeWriter();
+</script>
+</body>
+</html>
